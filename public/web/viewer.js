@@ -20,17 +20,7 @@ import { AppOptions } from "./app_options.js";
 import { LinkTarget } from "./pdf_link_service.js";
 import { PDFViewerApplication } from "./app.js";
 
-/* eslint-disable-next-line no-unused-vars */
-const pdfjsVersion =
-  typeof PDFJSDev !== "undefined" ? PDFJSDev.eval("BUNDLE_VERSION") : void 0;
-/* eslint-disable-next-line no-unused-vars */
-const pdfjsBuild =
-  typeof PDFJSDev !== "undefined" ? PDFJSDev.eval("BUNDLE_BUILD") : void 0;
-
-const AppConstants =
-  typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
-    ? { LinkTarget, RenderingStates, ScrollMode, SpreadMode }
-    : null;
+const AppConstants = { LinkTarget, RenderingStates, ScrollMode, SpreadMode };
 
 window.PDFViewerApplication = PDFViewerApplication;
 window.PDFViewerApplicationConstants = AppConstants;
@@ -52,10 +42,7 @@ function getViewerConfiguration() {
       zoomIn: document.getElementById("zoomIn"),
       zoomOut: document.getElementById("zoomOut"),
       viewFind: document.getElementById("viewFind"),
-      openFile:
-        typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
-          ? document.getElementById("openFile")
-          : null,
+      openFile: document.getElementById("openFile"),
       print: document.getElementById("print"),
       editorFreeTextButton: document.getElementById("editorFreeText"),
       editorFreeTextParamsToolbar: document.getElementById(
@@ -65,109 +52,106 @@ function getViewerConfiguration() {
       editorInkParamsToolbar: document.getElementById("editorInkParamsToolbar"),
       download: document.getElementById("download"),
     },
-    secondaryToolbar: {
-      toolbar: document.getElementById("secondaryToolbar"),
-      toggleButton: document.getElementById("secondaryToolbarToggle"),
-      presentationModeButton: document.getElementById("presentationMode"),
-      openFileButton:
-        typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
-          ? document.getElementById("secondaryOpenFile")
-          : null,
-      printButton: document.getElementById("secondaryPrint"),
-      downloadButton: document.getElementById("secondaryDownload"),
-      viewBookmarkButton: document.getElementById("viewBookmark"),
-      firstPageButton: document.getElementById("firstPage"),
-      lastPageButton: document.getElementById("lastPage"),
-      pageRotateCwButton: document.getElementById("pageRotateCw"),
-      pageRotateCcwButton: document.getElementById("pageRotateCcw"),
-      cursorSelectToolButton: document.getElementById("cursorSelectTool"),
-      cursorHandToolButton: document.getElementById("cursorHandTool"),
-      scrollPageButton: document.getElementById("scrollPage"),
-      scrollVerticalButton: document.getElementById("scrollVertical"),
-      scrollHorizontalButton: document.getElementById("scrollHorizontal"),
-      scrollWrappedButton: document.getElementById("scrollWrapped"),
-      spreadNoneButton: document.getElementById("spreadNone"),
-      spreadOddButton: document.getElementById("spreadOdd"),
-      spreadEvenButton: document.getElementById("spreadEven"),
-      documentPropertiesButton: document.getElementById("documentProperties"),
-    },
-    sidebar: {
-      // Divs (and sidebar button)
-      outerContainer: document.getElementById("outerContainer"),
-      sidebarContainer: document.getElementById("sidebarContainer"),
-      toggleButton: document.getElementById("sidebarToggle"),
-      // Buttons
-      thumbnailButton: document.getElementById("viewThumbnail"),
-      outlineButton: document.getElementById("viewOutline"),
-      attachmentsButton: document.getElementById("viewAttachments"),
-      layersButton: document.getElementById("viewLayers"),
-      // Views
-      thumbnailView: document.getElementById("thumbnailView"),
-      outlineView: document.getElementById("outlineView"),
-      attachmentsView: document.getElementById("attachmentsView"),
-      layersView: document.getElementById("layersView"),
-      // View-specific options
-      outlineOptionsContainer: document.getElementById(
-        "outlineOptionsContainer"
-      ),
-      currentOutlineItemButton: document.getElementById("currentOutlineItem"),
-    },
+    // secondaryToolbar: {
+    //   toolbar: document.getElementById("secondaryToolbar"),
+    //   toggleButton: document.getElementById("secondaryToolbarToggle"),
+    //   presentationModeButton: document.getElementById("presentationMode"),
+    //   openFileButton:
+    //     typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
+    //       ? document.getElementById("secondaryOpenFile")
+    //       : null,
+    //   printButton: document.getElementById("secondaryPrint"),
+    //   downloadButton: document.getElementById("secondaryDownload"),
+    //   viewBookmarkButton: document.getElementById("viewBookmark"),
+    //   firstPageButton: document.getElementById("firstPage"),
+    //   lastPageButton: document.getElementById("lastPage"),
+    //   pageRotateCwButton: document.getElementById("pageRotateCw"),
+    //   pageRotateCcwButton: document.getElementById("pageRotateCcw"),
+    //   cursorSelectToolButton: document.getElementById("cursorSelectTool"),
+    //   cursorHandToolButton: document.getElementById("cursorHandTool"),
+    //   scrollPageButton: document.getElementById("scrollPage"),
+    //   scrollVerticalButton: document.getElementById("scrollVertical"),
+    //   scrollHorizontalButton: document.getElementById("scrollHorizontal"),
+    //   scrollWrappedButton: document.getElementById("scrollWrapped"),
+    //   spreadNoneButton: document.getElementById("spreadNone"),
+    //   spreadOddButton: document.getElementById("spreadOdd"),
+    //   spreadEvenButton: document.getElementById("spreadEven"),
+    //   documentPropertiesButton: document.getElementById("documentProperties"),
+    // },
+    // sidebar: {
+    //   // Divs (and sidebar button)
+    //   outerContainer: document.getElementById("outerContainer"),
+    //   sidebarContainer: document.getElementById("sidebarContainer"),
+    //   toggleButton: document.getElementById("sidebarToggle"),
+    //   // Buttons
+    //   thumbnailButton: document.getElementById("viewThumbnail"),
+    //   outlineButton: document.getElementById("viewOutline"),
+    //   attachmentsButton: document.getElementById("viewAttachments"),
+    //   layersButton: document.getElementById("viewLayers"),
+    //   // Views
+    //   thumbnailView: document.getElementById("thumbnailView"),
+    //   outlineView: document.getElementById("outlineView"),
+    //   attachmentsView: document.getElementById("attachmentsView"),
+    //   layersView: document.getElementById("layersView"),
+    //   // View-specific options
+    //   outlineOptionsContainer: document.getElementById(
+    //     "outlineOptionsContainer"
+    //   ),
+    //   currentOutlineItemButton: document.getElementById("currentOutlineItem"),
+    // },
     sidebarResizer: {
       outerContainer: document.getElementById("outerContainer"),
       resizer: document.getElementById("sidebarResizer"),
     },
-    findBar: {
-      bar: document.getElementById("findbar"),
-      toggleButton: document.getElementById("viewFind"),
-      findField: document.getElementById("findInput"),
-      highlightAllCheckbox: document.getElementById("findHighlightAll"),
-      caseSensitiveCheckbox: document.getElementById("findMatchCase"),
-      matchDiacriticsCheckbox: document.getElementById("findMatchDiacritics"),
-      entireWordCheckbox: document.getElementById("findEntireWord"),
-      findMsg: document.getElementById("findMsg"),
-      findResultsCount: document.getElementById("findResultsCount"),
-      findPreviousButton: document.getElementById("findPrevious"),
-      findNextButton: document.getElementById("findNext"),
-    },
-    passwordOverlay: {
-      dialog: document.getElementById("passwordDialog"),
-      label: document.getElementById("passwordText"),
-      input: document.getElementById("password"),
-      submitButton: document.getElementById("passwordSubmit"),
-      cancelButton: document.getElementById("passwordCancel"),
-    },
-    documentProperties: {
-      dialog: document.getElementById("documentPropertiesDialog"),
-      closeButton: document.getElementById("documentPropertiesClose"),
-      fields: {
-        fileName: document.getElementById("fileNameField"),
-        fileSize: document.getElementById("fileSizeField"),
-        title: document.getElementById("titleField"),
-        author: document.getElementById("authorField"),
-        subject: document.getElementById("subjectField"),
-        keywords: document.getElementById("keywordsField"),
-        creationDate: document.getElementById("creationDateField"),
-        modificationDate: document.getElementById("modificationDateField"),
-        creator: document.getElementById("creatorField"),
-        producer: document.getElementById("producerField"),
-        version: document.getElementById("versionField"),
-        pageCount: document.getElementById("pageCountField"),
-        pageSize: document.getElementById("pageSizeField"),
-        linearized: document.getElementById("linearizedField"),
-      },
-    },
-    annotationEditorParams: {
-      editorFreeTextFontSize: document.getElementById("editorFreeTextFontSize"),
-      editorFreeTextColor: document.getElementById("editorFreeTextColor"),
-      editorInkColor: document.getElementById("editorInkColor"),
-      editorInkThickness: document.getElementById("editorInkThickness"),
-      editorInkOpacity: document.getElementById("editorInkOpacity"),
-    },
+    // findBar: {
+    //   bar: document.getElementById("findbar"),
+    //   toggleButton: document.getElementById("viewFind"),
+    //   findField: document.getElementById("findInput"),
+    //   highlightAllCheckbox: document.getElementById("findHighlightAll"),
+    //   caseSensitiveCheckbox: document.getElementById("findMatchCase"),
+    //   matchDiacriticsCheckbox: document.getElementById("findMatchDiacritics"),
+    //   entireWordCheckbox: document.getElementById("findEntireWord"),
+    //   findMsg: document.getElementById("findMsg"),
+    //   findResultsCount: document.getElementById("findResultsCount"),
+    //   findPreviousButton: document.getElementById("findPrevious"),
+    //   findNextButton: document.getElementById("findNext"),
+    // },
+    // passwordOverlay: {
+    //   dialog: document.getElementById("passwordDialog"),
+    //   label: document.getElementById("passwordText"),
+    //   input: document.getElementById("password"),
+    //   submitButton: document.getElementById("passwordSubmit"),
+    //   cancelButton: document.getElementById("passwordCancel"),
+    // },
+    // documentProperties: {
+    //   dialog: document.getElementById("documentPropertiesDialog"),
+    //   closeButton: document.getElementById("documentPropertiesClose"),
+    //   fields: {
+    //     fileName: document.getElementById("fileNameField"),
+    //     fileSize: document.getElementById("fileSizeField"),
+    //     title: document.getElementById("titleField"),
+    //     author: document.getElementById("authorField"),
+    //     subject: document.getElementById("subjectField"),
+    //     keywords: document.getElementById("keywordsField"),
+    //     creationDate: document.getElementById("creationDateField"),
+    //     modificationDate: document.getElementById("modificationDateField"),
+    //     creator: document.getElementById("creatorField"),
+    //     producer: document.getElementById("producerField"),
+    //     version: document.getElementById("versionField"),
+    //     pageCount: document.getElementById("pageCountField"),
+    //     pageSize: document.getElementById("pageSizeField"),
+    //     linearized: document.getElementById("linearizedField"),
+    //   },
+    // },
+    // annotationEditorParams: {
+    //   editorFreeTextFontSize: document.getElementById("editorFreeTextFontSize"),
+    //   editorFreeTextColor: document.getElementById("editorFreeTextColor"),
+    //   editorInkColor: document.getElementById("editorInkColor"),
+    //   editorInkThickness: document.getElementById("editorInkThickness"),
+    //   editorInkOpacity: document.getElementById("editorInkOpacity"),
+    // },
     printContainer: document.getElementById("printContainer"),
-    openFileInput:
-      typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
-        ? document.getElementById("fileInput")
-        : null,
+    openFileInput: document.getElementById("fileInput"),
     debuggerScriptPath: "./debugger.js",
   };
 }
@@ -176,29 +160,6 @@ function webViewerLoad() {
   const config = getViewerConfiguration();
   console.log(config);
 
-  if (typeof PDFJSDev !== "undefined" && PDFJSDev.test("GENERIC")) {
-    // Give custom implementations of the default viewer a simpler way to
-    // set various `AppOptions`, by dispatching an event once all viewer
-    // files are loaded but *before* the viewer initialization has run.
-    const event = new CustomEvent("webviewerloaded", {
-      bubbles: true,
-      cancelable: true,
-      detail: {
-        source: window,
-      },
-    });
-    try {
-      // Attempt to dispatch the event at the embedding `document`,
-      // in order to support cases where the viewer is embedded in
-      // a *dynamically* created <iframe> element.
-      parent.document.dispatchEvent(event);
-    } catch (ex) {
-      // The viewer could be in e.g. a cross-origin <iframe> element,
-      // fallback to dispatching the event at the current `document`.
-      console.error(`webviewerloaded: ${ex}`);
-      document.dispatchEvent(event);
-    }
-  }
   PDFViewerApplication.run(config);
 }
 

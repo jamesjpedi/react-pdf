@@ -1260,12 +1260,12 @@
   }
 }
 
-* {
+/* * {
   padding: 0;
   margin: 0;
-}
+} */
 
-html,
+/* html,
 body {
   height: 100%;
   width: 100%;
@@ -1274,7 +1274,7 @@ body {
 body {
   background-color: var(--body-bg-color);
   scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color);
-}
+} */
 
 .hidden,
 [hidden] {
